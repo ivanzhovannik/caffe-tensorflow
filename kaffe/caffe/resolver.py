@@ -14,14 +14,14 @@ class CaffeResolver(object):
             self.caffe = caffe
         except ImportError:
             # Fall back to the protobuf implementation
-            from . import caffepb
-            self.caffepb = caffepb
+            from . import caffe_pb2
+            self.caffe_pb2 = caffe_pb2
             show_fallback_warning()
         if self.caffe:
             # Use the protobuf code from the imported distribution.
             # This way, Caffe variants with custom layers will work.
-            self.caffepb = self.caffe.proto.caffe_pb2
-        self.NetParameter = self.caffepb.NetParameter
+            self.caffe_pb2 = self.caffe.proto.caffe_pb2
+        self.NetParameter = self.caffe_pb2.NetParameter
 
     def has_pycaffe(self):
         return self.caffe is not None
